@@ -1,6 +1,4 @@
-<h1>All Posts</h1>
-<% @posts.each do |post| %>
+<% current_user.posts.each do |post| %>
   <p>Title: <%= post.title %></p>
   <p><%= post.body %></p>
-  <p>Posted by: <%= post.user.username %></p>
 <% end %>

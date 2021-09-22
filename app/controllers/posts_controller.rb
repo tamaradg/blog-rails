@@ -18,6 +18,16 @@ def create
   end
 end
 
+# def edit
+#   @post = Post.find(params[:id])
+# end
+
+# def update
+#   @post.update(posts_params)
+# end
+
+
+
 private
 
 def post_params
