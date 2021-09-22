@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+before_action :set_post, only: [:edit, :update]
 
 def index
   @posts = Post.all
@@ -18,13 +19,14 @@ def create
   end
 end
 
-# def edit
-#   @post = Post.find(params[:id])
-# end
+def edit
 
-# def update
-#   @post.update(posts_params)
-# end
+end
+
+def update
+  @post.update(post_params)
+  redirect_to posts_path(@post)
+end
 
 
 
@@ -33,6 +35,10 @@ private
 def post_params
   params.require(:post)
         .permit(:title, :body, :user_id)
+end
+
+def set_post
+  @post = Post.find(params[:id])
 end
 
 end

@@ -1,4 +1,6 @@
 <% current_user.posts.each do |post| %>
   <p>Title: <%= post.title %></p>
   <p><%= post.body %></p>
+
+<%= link_to "Edit post", edit_post_path(post), class: "btn"%>
 <% end %>
