@@ -1,18 +1,23 @@
 class CommentsController < ApplicationController
-before_action :set_comment, only: [:edit, :update, :destroy]
+
+
 
 def new
+@post = Post.find(params[:post_id])
 @comment = Comment.new
 end
 
 def create
-@comment = Comment.new(comment_params)
-  @comment.user = current_user
-  if @comment.save
-    redirect_to comment_path(@comment)
-  else
-    render :new
-  end
+    @comment = Comment.new(comment_params)
+    @post = Post.find(params[:post_id])
+    @comment.user = current_user
+    @comment.post = @post
+    if @comment.save
+      redirect_to posts_path(@post)
+    else
+      flash[:notice] = "Something went wrong... Please try again! 👍"
+      redirect_to posts_path(@post)
+    end
 end
 
 def edit
@@ -23,9 +28,10 @@ def update
  redirect_to comments_path(@comment)
 end
 
-def destroy
-@comment.destroy
-redirect_to comments_path
+# def destroy
+# @comment.destroy
+# redirect_to comments_path
+# end
 
 private
 
@@ -34,8 +40,8 @@ def comment_params
         .permit(:title, :body, :user_id, :post_id)
 end
 
-def set_comment
-  @comment = Comment.find(params[:id])
+def set_post
+  @post = Post.find(params[:post_id])
 end
 
 end

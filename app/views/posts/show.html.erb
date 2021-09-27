@@ -1,3 +1,11 @@
 
-  <p>Title: <%= @post.title %></p>
-  <p><%= @post.body %></p>
+<p>Title: <%= @post.title %></p>
+<p><%= @post.body %></p>
+
+<ul class="list-group">
+  <% @post.comments.each do |comment| %>
+    <li class="list-group-item"><%= comment.title %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Leave a review', new_post_comment_path(@post) %>
